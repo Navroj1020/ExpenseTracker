@@ -11,7 +11,6 @@ import CustomToolTip from './CustomToolTip';
 import CustomLegend from './CustomLegend';
 
 const CustomPieChart = ({data, label, totalAmount, colors, showTextAnchor}) => {
-    console.log({label});
   return <ResponsiveContainer width="100%" height={380}>
         <PieChart>
             <Pie
