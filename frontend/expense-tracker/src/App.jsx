@@ -42,15 +42,21 @@ const App = () => {
 
 export default App;
 
-const Root = () =>{
-  // Check if token is in local storage
-  const isAuthenticated = !!localStorage.getItem("token");
+// const Root = () =>{
+//   // Check if token is in local storage
+//   const isAuthenticated = !!localStorage.getItem("token");
 
-  //redirect to dashboard else go to login page
-  return isAuthenticated?(
-    <Navigate to="/dashboard"/>
-  ) : (
-    <Navigate to="/login"/>
-  )
+//   //redirect to dashboard else go to login page
+//   return isAuthenticated?(
+//     <Navigate to="/dashboard"/>
+//   ) : (
+//     <Navigate to="/login"/>
+//   )
   
-}
+// }
+const Root = () => {
+  const token = localStorage.getItem("token");
+  const isAuthenticated = Boolean(token);
+
+  return <Navigate to={isAuthenticated ? "/dashboard" : "/login"} />;
+};
