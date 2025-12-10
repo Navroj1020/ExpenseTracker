@@ -13,13 +13,37 @@ const dashboardRoutes = require("./routes/dashboardRoutes");
 const app = express();
 
 //Middleware to handle CORS
-app.use(cors(
-    {
-        origin: process.env.CLIENT_URL || "*",
-        methods: ["GET","PUT","POST","DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"]
+// Middleware to handle CORS (supports multiple origins)
+const rawClientUrls = process.env.CLIENT_URL || "";
+const allowedOrigins = rawClientUrls === "*" 
+  ? "*" 
+  : rawClientUrls.split(',').map(u => u.trim()).filter(Boolean);
+
+const corsOptions = {
+  origin: function(origin, callback) {
+    // allow requests with no origin (e.g. curl, server-to-server)
+    if (!origin) return callback(null, true);
+
+    // allow all origins if wildcard specified
+    if (allowedOrigins === "*") return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error(`CORS policy: origin ${origin} not allowed`));
     }
-));
+  },
+  methods: ["GET", "PUT", "POST", "DELETE", "OPTIONS", "PATCH"],
+  allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+  credentials: true, // set to true only if you need cookies/auth via cookies
+  optionsSuccessStatus: 204
+};
+
+// enable CORS for all routes using the options
+app.use(cors(corsOptions));
+// explicitly handle preflight for all routes
+app.options('*', cors(corsOptions));
+
 
 app.use(express.json());
 
