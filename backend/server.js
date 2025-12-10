@@ -36,3 +36,8 @@ app.use('/uploads', express.static(path.join(__dirname,'uploads')));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>  console.log(`Server is running on port ${PORT}`));
+
+// after your other app.use(...) lines
+app.get('/api/ping', (req, res) => {
+  res.json({ ok: true, ts: Date.now(), env: process.env.NODE_ENV || 'dev' });
+});
