@@ -11,9 +11,21 @@ import Home from './pages/Dashboard/Home';
 import Income from './pages/Dashboard/Income';
 import Expense from './pages/Dashboard/Expense';
 import UserProvider from './context/userContext';
+import { useBackendWakeup } from "./hooks/useBackendWakeup";
+import WakeupScreen from "./components/WakeupScreen";
 import { Toaster } from "react-hot-toast"
 
 const App = () => {
+  const { status, elapsed } = useBackendWakeup();
+
+  if (status === "waking") return <WakeupScreen elapsed={elapsed} />;
+  
+  if (status === "timeout") return (
+    <WakeupScreen
+      elapsed={elapsed}
+      onRetry={() => window.location.reload()}
+    />
+  );
   return (
     <UserProvider>
     <div>
