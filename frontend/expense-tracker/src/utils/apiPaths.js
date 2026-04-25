@@ -24,6 +24,6 @@ export const API_PATHS = {
         UPLOAD_IMAGE: "/api/v1/auth/upload-image",
     },
     PING:{
-        PING_BACKEND: "/api/ping",
+        PING_BACKEND: "api/ping",
     }
 };
