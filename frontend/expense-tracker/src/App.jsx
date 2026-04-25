@@ -25,7 +25,7 @@ const App = () => {
       elapsed={elapsed}
       onRetry={() => window.location.reload()}
     />
-  );
+  )
   return (
     <UserProvider>
     <div>
