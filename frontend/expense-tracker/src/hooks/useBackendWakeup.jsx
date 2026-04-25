@@ -17,7 +17,7 @@ export function useBackendWakeup() {
     async function ping() {
       // First ping — fast check
       try {
-        const res = await fetch(`${BACKEND_URL}/api/ping`, {
+        const res = await fetch(API_PATHS.PING.PING_BACKEND, {
           signal: AbortSignal.timeout(COLD_START_THRESHOLD_MS),
         });
         if (res.ok && !cancelled) {

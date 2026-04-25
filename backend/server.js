@@ -58,7 +58,6 @@ app.use("/api/v1/dashboard",dashboardRoutes)
 //Serve uploads folder
 app.use('/uploads', express.static(path.join(__dirname,'uploads')));
 
-// after your other app.use(...) lines
 app.get('/api/ping', (req, res) => {
   res.json({ ok: true, ts: Date.now(), env: process.env.NODE_ENV || 'dev' });
 });
