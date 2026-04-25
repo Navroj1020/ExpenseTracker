@@ -34,7 +34,7 @@ export default function WakeupScreen({ elapsed, onRetry }) {
           Starting up server
         </p>
         <p style={{ fontSize: 13, color: "rgba(232,230,240,0.45)", margin: "0 0 1.5rem", fontFamily: "monospace" }}>
-          free tier · spinning up
+          Spinning up
         </p>
 
         {/* Progress bar */}
